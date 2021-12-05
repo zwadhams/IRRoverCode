@@ -4,6 +4,7 @@
 IRrecv irrecv(irPin);
 decode_results results;
  
+//sets up pins that correlate to each motor (runs once)
 void setup() {
   pinMode(8,OUTPUT);
   pinMode(9,OUTPUT);
@@ -13,7 +14,8 @@ void setup() {
   Serial.begin(9600);
   irrecv.enableIRIn();
 }
- 
+
+//switch statement for each case of movement (loops infinitely)
 void loop() {
   
    if (irrecv.decode(&results)) {
@@ -43,10 +45,13 @@ void loop() {
  
          
          }      
-   irrecv.resume();
+   irrecv.resume(); 
    }
 }
  
+// below are each of the 5 functions used
+
+//makes all motors turn forward
 void forward()
 {
             digitalWrite(8, HIGH);
@@ -54,7 +59,8 @@ void forward()
             digitalWrite(10, HIGH);
             digitalWrite(11, LOW);
 }
- 
+
+//makes all motors turn backwards
 void back()
 {
               digitalWrite(8, LOW);
@@ -62,7 +68,8 @@ void back()
               digitalWrite(10, LOW);
               digitalWrite(11, HIGH);
 }
- 
+
+//makes left motors turn forward and right motors turn backwards
 void left()
 {
             digitalWrite(8, LOW);
@@ -70,7 +77,8 @@ void left()
             digitalWrite(10, HIGH);
             digitalWrite(11, LOW);
 }
- 
+
+//makes right motors turn forward and left motors turn backwards
 void right()
 {
               digitalWrite(8, HIGH);
@@ -78,7 +86,8 @@ void right()
               digitalWrite(10, LOW);
               digitalWrite(11, HIGH);
 } 
- 
+
+//stops all motor movement
 void Stop()
 {
             digitalWrite(8, LOW);
